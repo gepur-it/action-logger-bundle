@@ -2,13 +2,11 @@
 
 namespace Tests;
 
+use Doctrine\ODM\MongoDB\DocumentManager;
 use GepurIt\ActionLoggerBundle\Document\LogRow;
 use GepurIt\ActionLoggerBundle\Logger\ActionLogger;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface as User;
-use Doctrine\ODM\MongoDB\DocumentManager;
+use GepurIt\User\Security\User;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class ActionLoggerTest extends TestCase
 {
@@ -37,12 +35,11 @@ class ActionLoggerTest extends TestCase
         $user = $this->getUserMock();
 
         $user->expects($this->once())
-            ->method('getLdapSid')
+            ->method('getUserId')
             ->willReturn('string');
         $user->expects($this->once())
             ->method('getName')
             ->willReturn('string');
-
 
         $actionLogger = new ActionLogger($entityManagerMock);
         $actionLogger->log($user, $actionName, $actionLabel);
@@ -74,7 +71,7 @@ class ActionLoggerTest extends TestCase
         $user = $this->getUserMock();
 
         $user->expects($this->once())
-            ->method('getLdapSid')
+            ->method('getUserId')
             ->willReturn('string');
         $user->expects($this->once())
             ->method('getName')
@@ -112,19 +109,12 @@ class ActionLoggerTest extends TestCase
             ->disableOriginalConstructor()
             ->disableOriginalClone()
             ->disableArgumentCloning()
-            ->setMethods([
-                'getLdapSid',
-                'getName',
-                'isAccountNonLocked',
-                'isAccountNonExpired',
-                'isCredentialsNonExpired',
-                'isEnabled',
-                'getRoles',
-                'getPassword',
-                'getSalt',
-                'getUsername',
-                'eraseCredentials'
-            ])
+            ->setMethods(
+                [
+                    'getUserId',
+                    'getName',
+                ]
+            )
             ->getMock();
     }
 }

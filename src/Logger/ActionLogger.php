@@ -7,9 +7,8 @@
 namespace GepurIt\ActionLoggerBundle\Logger;
 
 use GepurIt\ActionLoggerBundle\Document\LogRow;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface as User;
 use Doctrine\ODM\MongoDB\DocumentManager;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use GepurIt\User\Security\User;
 
 /**
  * Class ActionLogger
@@ -36,7 +35,7 @@ class ActionLogger implements ActionLoggerInterface
     public function log(User $user, string $actionName, string $actionLabel, $actionData = null)
     {
         $log = new LogRow();
-        $log->setAuthorId($user->getLdapSid());
+        $log->setAuthorId($user->getUserId());
         $log->setAuthorName($user->getName());
         $log->setActionName($actionName);
         $log->setActionLabel($actionLabel);

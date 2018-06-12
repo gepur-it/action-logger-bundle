@@ -6,7 +6,7 @@
 
 namespace GepurIt\ActionLoggerBundle\Logger;
 
-use Symfony\Component\Security\Core\User\AdvancedUserInterface as User;
+use GepurIt\User\Security\User;
 
 /**
  * Class ActionLogInterface
