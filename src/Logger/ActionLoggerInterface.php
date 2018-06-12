@@ -6,8 +6,6 @@
 
 namespace GepurIt\ActionLoggerBundle\Logger;
 
-use GepurIt\User\Security\User;
-
 /**
  * Class ActionLogInterface
  * @package GepurIt\Logger
@@ -15,12 +13,11 @@ use GepurIt\User\Security\User;
 interface ActionLoggerInterface
 {
     /**
-     * @param User $user
      * @param string $actionName
      * @param string $actionLabel
      * @param null $actionData
      * @return mixed
      */
-    public function log(User $user, string $actionName, string $actionLabel, $actionData = null);
+    public function log(string $actionName, string $actionLabel, $actionData = null);
 }
 
