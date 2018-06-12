@@ -7,6 +7,8 @@ use GepurIt\ActionLoggerBundle\Document\LogRow;
 use GepurIt\ActionLoggerBundle\Logger\ActionLogger;
 use GepurIt\User\Security\User;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ActionLoggerTest extends TestCase
 {
@@ -19,6 +21,22 @@ class ActionLoggerTest extends TestCase
         $actionName = 'actionName';
         $actionLabel = 'actionLabel';
 
+        $user = $this->getUserMock();
+
+        $user->expects($this->once())
+            ->method('getUserId')
+            ->willReturn('string');
+        $user->expects($this->once())
+            ->method('getName')
+            ->willReturn('string');
+        $token = $this->createMock(TokenInterface::class);
+        $token->expects($this->once())
+            ->method('getUser')
+            ->willReturn($user);
+        $tokenStorageInterface = $this->createMock(TokenStorageInterface::class);
+        $tokenStorageInterface->expects($this->once())
+            ->method('getToken')
+            ->willReturn($token);
         //$entityManagerMock = $this->mockingEntityManager();
         $entityManagerMock = $this->getEntityManagerMock();
         $entityManagerMock
@@ -32,17 +50,9 @@ class ActionLoggerTest extends TestCase
             ->with($this->isInstanceOf(LogRow::class))
             ->willReturn(null);
 
-        $user = $this->getUserMock();
 
-        $user->expects($this->once())
-            ->method('getUserId')
-            ->willReturn('string');
-        $user->expects($this->once())
-            ->method('getName')
-            ->willReturn('string');
-
-        $actionLogger = new ActionLogger($entityManagerMock);
-        $actionLogger->log($user, $actionName, $actionLabel);
+        $actionLogger = new ActionLogger($entityManagerMock, $tokenStorageInterface);
+        $actionLogger->log($actionName, $actionLabel);
     }
 
     /**
@@ -55,6 +65,23 @@ class ActionLoggerTest extends TestCase
         $actionLabel = 'actionLabel';
         $actionData = ['action' => 'data', 'params' => 2]; //for example
 
+        $user = $this->getUserMock();
+
+        $user->expects($this->once())
+            ->method('getUserId')
+            ->willReturn('string');
+        $user->expects($this->once())
+            ->method('getName')
+            ->willReturn('string');
+        $token = $this->createMock(TokenInterface::class);
+        $token->expects($this->once())
+            ->method('getUser')
+            ->willReturn($user);
+        $tokenStorageInterface = $this->createMock(TokenStorageInterface::class);
+        $tokenStorageInterface->expects($this->once())
+            ->method('getToken')
+            ->willReturn($token);
+
         //$entityManagerMock = $this->mockingEntityManager();
         $entityManagerMock = $this->getEntityManagerMock();
         $entityManagerMock
@@ -68,17 +95,8 @@ class ActionLoggerTest extends TestCase
             ->with($this->isInstanceOf(LogRow::class))
             ->willReturn(null);
 
-        $user = $this->getUserMock();
-
-        $user->expects($this->once())
-            ->method('getUserId')
-            ->willReturn('string');
-        $user->expects($this->once())
-            ->method('getName')
-            ->willReturn('string');
-
-        $actionLogger = new ActionLogger($entityManagerMock);
-        $actionLogger->log($user, $actionName, $actionLabel, $actionData);
+        $actionLogger = new ActionLogger($entityManagerMock, $tokenStorageInterface);
+        $actionLogger->log($actionName, $actionLabel, $actionData);
     }
 
     /**

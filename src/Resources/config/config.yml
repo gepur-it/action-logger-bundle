@@ -1,6 +1,8 @@
 services:
-    database_action_logger:
+    GepurIt\ActionLoggerBundle\Logger\ActionLoggerInterface:
         class: GepurIt\ActionLoggerBundle\Logger\ActionLogger
-        public: false
-        arguments:
-            - '@doctrine.odm.mongodb.document_manager'
+        autowire: true
+
+    app.action_logger:
+        alias: GepurIt\ActionLoggerBundle\Logger\ActionLoggerInterface
+        public: true
