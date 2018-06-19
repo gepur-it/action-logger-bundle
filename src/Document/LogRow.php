@@ -13,7 +13,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
  * Class ActionLogRow
  * @package ActionLoggerBundle\Entity
  *
- * @MongoDB\Document(repositoryClass="ActionLoggerBundle\Repository\LogRowRepository")
+ * @MongoDB\Document(repositoryClass="GepurIt\ActionLoggerBundle\Repository\LogRowRepository")
  * @MongoDB\HasLifecycleCallbacks()
  */
 class LogRow
