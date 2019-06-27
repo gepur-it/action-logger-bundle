@@ -6,8 +6,6 @@
 
 namespace GepurIt\ActionLoggerBundle;
 
-use GepurIt\ActionLoggerBundle\DependencyInjection\Compiler\ActionLoggerCompilerPass;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**

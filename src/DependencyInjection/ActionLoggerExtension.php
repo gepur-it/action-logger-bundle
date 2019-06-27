@@ -22,12 +22,12 @@ class ActionLoggerExtension extends Extension
     /**
      * Loads a specific configuration.
      *
-     * @param array $configs An array of configuration values
+     * @param array            $configs An array of configuration values
      * @param ContainerBuilder $container A ContainerBuilder instance
      *
-     * @throws \InvalidArgumentException When provided tag is not defined in this extension
+     * @throws \Exception
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         {
             $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -44,7 +44,7 @@ class ActionLoggerExtension extends Extension
         }
     }
 
-    public function getAlias()
+    public function getAlias(): string
     {
         return 'action_logger';
     }

@@ -38,7 +38,7 @@ class ActionLogger implements ActionLoggerInterface
     /**
      * {@inheritdoc}
      */
-    public function log(string $actionName, string $actionLabel, $actionData = null)
+    public function log(string $actionName, string $actionLabel, $actionData = null): void
     {
         /** @var User $user */
         $user = $this->tokenStorage->getToken()->getUser();

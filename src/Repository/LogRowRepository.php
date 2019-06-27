@@ -6,9 +6,9 @@
 
 namespace GepurIt\ActionLoggerBundle\Repository;
 
-use GepurIt\ActionLoggerBundle\Document\LogRow;
-use Doctrine\ODM\MongoDB\DocumentRepository;
 use DateTime;
+use Doctrine\ODM\MongoDB\DocumentRepository;
+use GepurIt\ActionLoggerBundle\Document\LogRow;
 
 /**
  * Class LogRowRepository
@@ -19,10 +19,10 @@ class LogRowRepository extends DocumentRepository
     /**
      * @param DateTime $dateFrom
      * @param DateTime $dateTo
-     * @param string $managerId
+     * @param string   $managerId
      * @return LogRow[]
      */
-    public function findFinishedMailLogsByDate(DateTime $dateFrom, DateTime $dateTo, string $managerId)
+    public function findFinishedMailLogsByDate(DateTime $dateFrom, DateTime $dateTo, string $managerId): array
     {
         $query = $this->createQueryBuilder()
             ->field('actionName')->in([LogRow::ACTION__MAIL_WITHOUT_ANSWER, LogRow::ACTION__MAIL_WITH_ANSWER])
@@ -39,7 +39,7 @@ class LogRowRepository extends DocumentRepository
      */
     public function findTakeNewClientMailLogByEmailId($emailId): ?LogRow
     {
-        $records =  $this->createQueryBuilder()
+        $records = $this->createQueryBuilder()
             ->field('actionName')->equals(LogRow::ACTION__TAKE_NEW_CLIENT_MAIL)
             ->field('actionData.email_id')->equals($emailId)
             ->limit(1)
@@ -49,14 +49,14 @@ class LogRowRepository extends DocumentRepository
     }
 
     /**
-     * @param $emailAddress
+     * @param        $emailAddress
      * @param string $userId
      * @return LogRow|null
      */
     public function findClosedClientMailByEmailAndUser($emailAddress, $userId): ?LogRow
     {
         $builder = $this->createQueryBuilder();
-        $records =  $builder
+        $records = $builder
             ->field('actionName')->equals(LogRow::ACTION__CLOSE_RELATION)
             ->field('actionData.email_address')->equals($emailAddress)
             ->field('actionData.manager_id')->equals($userId)
@@ -67,7 +67,7 @@ class LogRowRepository extends DocumentRepository
     }
 
     /**
-     * @param string $managerId
+     * @param string   $managerId
      * @param DateTime $dateFrom
      * @param DateTime $dateTo
      * @return LogRow[]
@@ -79,6 +79,7 @@ class LogRowRepository extends DocumentRepository
             ->field('createdAt')->gte($dateFrom)->lte($dateTo)
             ->field('authorId')->equals($managerId)
             ->getQuery();
+
         return $query->toArray();
     }
 
@@ -114,6 +115,7 @@ class LogRowRepository extends DocumentRepository
             ->field('actionName')->in([LogRow::ACTION__NEW_OUTGOING_EMAIL, LogRow::ACTION__MAIL_WITH_ANSWER])
             ->field('createdAt')->gte($dateFrom)->lte($dateTo)
             ->getQuery();
+
         return $query->toArray();
     }
 }

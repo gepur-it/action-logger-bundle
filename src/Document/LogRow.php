@@ -155,7 +155,7 @@ class LogRow
     /**
      * @param mixed $actionData
      */
-    public function setActionData($actionData)
+    public function setActionData($actionData): void
     {
         $this->actionData = $actionData;
     }
@@ -171,7 +171,7 @@ class LogRow
     /**
      * @MongoDB\PrePersist()
      */
-    public function prePersist()
+    public function prePersist(): void
     {
         $this->createdAt = new \DateTime('now');
     }
