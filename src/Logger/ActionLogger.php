@@ -50,7 +50,6 @@ class ActionLogger implements ActionLoggerInterface
         $log->setActionData($actionData ?? '');
 
         $this->documentManager->persist($log);
-        $this->documentManager->flush($log);
     }
 }
 
