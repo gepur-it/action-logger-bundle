@@ -18,8 +18,8 @@
     "symfony/yaml": ">=4.0",
     "symfony/http-kernel": ">=4.0",
     "symfony/expression-language": "^4.0",
-    "doctrine/mongodb-odm": "^1.1",
-    "doctrine/mongodb-odm-bundle": "^3.4.1",
+    "doctrine/mongodb-odm": ">=1.1",
+    "doctrine/mongodb-odm-bundle": ">=3.4.1",
     "gepur-it/user": "^1.0"
   },
   "require-dev": {
