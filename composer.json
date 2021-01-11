@@ -1,7 +1,7 @@
 {
   "name": "gepur-it/action-logger-bundle",
   "description": "Action logger bundle",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "type": "symfony-bundle",
   "keywords": [
     "symfony",

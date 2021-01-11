@@ -118,4 +118,18 @@ class LogRowRepository extends DocumentRepository
 
         return $query->toArray();
     }
+
+    /**
+     * @param string $clientId
+     * @return array
+     */
+    public function findClientChanges(string $clientId): array
+    {
+        $query = $this->createQueryBuilder()
+            ->field('actionName')->in(['change_site_account'])
+            ->field('actionData.clientId')->equals($clientId)
+            ->getQuery();
+
+        return $query->toArray();
+    }
 }
