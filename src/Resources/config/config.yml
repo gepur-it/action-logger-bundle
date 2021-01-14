@@ -6,3 +6,8 @@ services:
     app.action_logger:
         alias: GepurIt\ActionLoggerBundle\Logger\ActionLoggerInterface
         public: true
+
+    GepurIt\ActionLoggerBundle\Repository\:
+        resource: '../../Repository'
+        autowire: true
+        tags: ['doctrine_mongodb.odm.repository_service']

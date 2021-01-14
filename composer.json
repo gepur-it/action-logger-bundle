@@ -1,7 +1,7 @@
 {
   "name": "gepur-it/action-logger-bundle",
   "description": "Action logger bundle",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "type": "symfony-bundle",
   "keywords": [
     "symfony",
@@ -18,7 +18,7 @@
     "symfony/yaml": "^5.0",
     "symfony/http-kernel": "^5.0",
     "symfony/expression-language": "^5.0",
-    "doctrine/mongodb-odm": ">=1.1",
+    "doctrine/mongodb-odm": ">=2.0.3",
     "doctrine/mongodb-odm-bundle": ">=3.4.1",
     "gepur-it/user": "^5.0"
   },

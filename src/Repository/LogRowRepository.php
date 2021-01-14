@@ -7,15 +7,26 @@
 namespace GepurIt\ActionLoggerBundle\Repository;
 
 use DateTime;
-use Doctrine\ODM\MongoDB\DocumentRepository;
+use Doctrine\Bundle\MongoDBBundle\Repository\ServiceDocumentRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use GepurIt\ActionLoggerBundle\Document\LogRow;
 
 /**
  * Class LogRowRepository
  * @package ActionLoggerBundle\Repository
  */
-class LogRowRepository extends DocumentRepository
+class LogRowRepository extends ServiceDocumentRepository
 {
+    /**
+     * LogRowRepository constructor.
+     *
+     * @param ManagerRegistry $registry
+     */
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, LogRow::class);
+    }
+
     /**
      * @param DateTime $dateFrom
      * @param DateTime $dateTo

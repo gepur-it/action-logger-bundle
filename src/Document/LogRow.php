@@ -29,48 +29,47 @@ class LogRow
      * @var string
      * @MongoDB\Id(strategy="UUID")
      */
-    private $logId;
+    private string $logId = '';
 
     /**
      * @var \DateTime
      * @MongoDB\Field(type="date")
      * @MongoDB\Index(order="asc")
      */
-    private $createdAt;
+    private ?\DateTime $createdAt = null;
 
     /**
      * @var string
      * @MongoDB\Field(type="string")
      * @MongoDB\Index()
      */
-    private $actionName = '';
+    private string $actionName = '';
 
     /**
      * @var string
      * @MongoDB\Field(type="string")
      */
-    private $actionLabel = '';
+    private string $actionLabel = '';
 
     /**
      * @var string
      * @MongoDB\Field(type="string", nullable=false)
      * @MongoDB\Index()
      */
-    private $authorId = '';
+    private string $authorId = '';
 
 
     /**
      * @var string
      * @MongoDB\Field(type="string", nullable=false)
      */
-    private $authorName = '';
+    private string $authorName = '';
 
     /**
-     * @var mixed
-     * @MongoDB\Field(type="raw", nullable=true )
+     * @var mixed|array|string|null
+     * @MongoDB\Field(type="raw", nullable=true)
      */
-    private $actionData = '';
-
+    private $actionData;
 
     /**
      * @return string
