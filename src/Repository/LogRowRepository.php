@@ -8,7 +8,7 @@ namespace GepurIt\ActionLoggerBundle\Repository;
 
 use DateTime;
 use Doctrine\Bundle\MongoDBBundle\Repository\ServiceDocumentRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
 use GepurIt\ActionLoggerBundle\Document\LogRow;
 
 /**
