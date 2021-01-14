@@ -132,15 +132,19 @@ class LogRowRepository extends ServiceDocumentRepository
 
     /**
      * @param string $clientId
+     * @param array  $actionNames
+     *
      * @return array
      */
-    public function findClientChanges(string $clientId): array
+    public function findClientChanges(string $clientId, array $actionNames = []): array
     {
         $query = $this->createQueryBuilder()
-            ->field('actionName')->in(['change_site_account'])
-            ->field('actionData.clientId')->equals($clientId)
-            ->getQuery();
+            ->field('actionData.clientId')->equals($clientId);
 
-        return $query->toArray();
+        if (!empty($actionNames)) {
+            $query->field('actionName')->in($actionNames);
+        }
+
+        return $query->getQuery()->toArray();
     }
 }
